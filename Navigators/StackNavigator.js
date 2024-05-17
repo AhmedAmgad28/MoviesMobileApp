@@ -4,6 +4,8 @@ import { routes } from "../utils/routes";
 import DrawerNavigation from './DrawerNavigator';
 import BottomTabNavigator from "./BottomTabNavigator";
 import MovieDetails from '../Screens/MovieDetails';
+import Search from '../Screens/Search';
+import Header from '../Components/Header';
 
 const Stack = createNativeStackNavigator();
 const StackNavigator = () => {
@@ -20,9 +22,19 @@ const StackNavigator = () => {
         name={routes.movieDetails}
         component={MovieDetails}
         options={{
-          headerShown: false,
+          headerStyle: {
+            backgroundColor: '#9900F0',
+          },
+          headerTitleStyle: {
+            color: 'white',
+          },
+          headerTintColor: 'white',
         }}
       />
+      <Stack.Screen name={routes.search} component={Search} options={{
+          headerShown: false,
+          header: () => <Header />,
+        }}/>
     </Stack.Navigator>
   );
 };
