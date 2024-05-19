@@ -5,12 +5,12 @@ import { useRoute } from '@react-navigation/native';
 import { IconButton } from 'react-native-paper';
 import { getSimilarMovies } from '../Redux/slices/MoviesSlice';
 import { addFavorite, removeFavorite } from '../Redux/slices/FavouriteSlice';
-import MovieCard from '../Components/MovieCard';
+import RelatedMovieCard from '../Components/RelatedMovieCard';
 
 const MovieDetails = () => {
     const dispatch = useDispatch();
     const route = useRoute();
-    const { movieId, title, poster, rate, date, overview, genre } = route.params;
+    const { movieId, title, poster, rate, date, overview, genre, tagline,status,runtime} = route.params;
     const { similarMovies } = useSelector((state) => state.movies);
     const favoriteMovies = useSelector((state) => state.favorites.favoriteMovies);
     const isFavorite = favoriteMovies.some((movie) => movie.id === movieId);
@@ -31,6 +31,9 @@ const MovieDetails = () => {
                     date,
                     overview,
                     genre,
+                    tagline,
+                    status,
+                    runtime,
                 })
         );
     };
@@ -62,7 +65,7 @@ const MovieDetails = () => {
                     <View style={styles.detailsContainer}>
                         <View style={styles.infoContainer}>
                             <View style={[styles.ratingContainer, { backgroundColor: getRatingColor(rate) }]}>
-                                <Text style={styles.ratingText}>{rate}</Text>
+                                <Text style={styles.ratingText}>{rate.toFixed(1)}</Text>
                             </View>
                             <Text style={styles.info}>Release Date: {date}</Text>
                         </View>
@@ -72,7 +75,7 @@ const MovieDetails = () => {
                     <FlatList
                         data={similarMovies}
                         renderItem={({ item }) => (
-                            <MovieCard
+                            <RelatedMovieCard
                                 id={item.id}
                                 title={item.title}
                                 poster={item.poster_path}

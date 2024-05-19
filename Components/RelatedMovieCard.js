@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { routes } from "../utils/routes";
 import { addFavorite, removeFavorite } from "../Redux/slices/FavouriteSlice";
 
-const MovieCard = ({
+const RelatedMovieCard = ({
   id: movieId,
   title,
   image,
@@ -51,6 +51,7 @@ const MovieCard = ({
   };
 
   const isFavorite = favoriteMovies.some((movie) => movie.id === movieId);
+
   return (
     <Pressable
       onPressIn={() => setIsPressed(true)}
@@ -83,7 +84,7 @@ const MovieCard = ({
 
 const styles = StyleSheet.create({
   container: {
-    width: 365,
+    width: 280,
     marginBottom: 20,
     borderRadius: 10,
     overflow: "hidden",
@@ -93,7 +94,8 @@ const styles = StyleSheet.create({
   },
   image: {
     width: "100%",
-    height: 550,
+    height: 400,
+    //aspectRatio: 365 / 250,
     borderRadius: 10,
   },
   titleRow: {
@@ -111,4 +113,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MovieCard;
+export default RelatedMovieCard;

@@ -2,15 +2,15 @@ import React, { useEffect } from 'react';
 import { FlatList, StyleSheet, View, Text, ImageBackground } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import MovieCard from '../Components/MovieCard';
-import { getPopularMovies } from '../Redux/slices/MoviesSlice';
+import { getPopularMovies, getTopratedMovies } from '../Redux/slices/MoviesSlice';
 import SearchBar from '../Components/SearchBar';
 
 const Home = () => {
     const dispatch = useDispatch();
-    const { popularMovies, loading, error } = useSelector((state) => state.movies);
+    const { topratedMovies, loading, error } = useSelector((state) => state.movies);
 
     useEffect(() => {
-        dispatch(getPopularMovies());
+        dispatch(getTopratedMovies());
     }, [dispatch]);
 
     if (loading) {
@@ -48,7 +48,7 @@ const Home = () => {
       >
         <View style={{ marginTop: 10 }}>
             <FlatList
-                data={popularMovies}
+                data={topratedMovies}
                 renderItem={({ item }) => (
                     <MovieCard 
                                 id={item.id} 
